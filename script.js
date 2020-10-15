@@ -8,6 +8,7 @@ function init()
     const blueB = document.querySelector('#blueB');
     const blackB = document.querySelector('#blackB');
     const randomB = document.querySelector('#randomB');
+    const resetB = document.querySelector('#resetB');
     const grid = document.createElement('div');
     
     grid.style.color = 'blue';
@@ -33,6 +34,7 @@ function init()
     blueB.addEventListener('click', changeSquareBlue);
     blackB.addEventListener('click', changeSquareBlack);
     randomB.addEventListener('click', changeSquareRandom);
+    resetB.addEventListener('click', resetGrid);
     container.appendChild(grid);
 }
 
@@ -59,5 +61,33 @@ function getSquareColor(){
         }
         return color;
     }else{return squareColor;}
+}
+function resetGrid(){
+    var answer = prompt("Please enter grid size: (1 - 100)", "16");
+    gridSize = answer;
+    const container = document.querySelector('#board');
+    while (container.hasChildNodes())
+    {
+        container.removeChild(container.firstChild);
+    }
+    const grid = document.createElement('div');
+    
+    grid.style.color = 'blue';
+    grid.classList.add('grid');
+    grid.style.display = 'grid';
+    grid.style.width = "480px";
+    grid.style.height = "480px";
+    grid.style.border = "2px solid black";
+    grid.style.gridTemplateColumns = 'repeat(' + gridSize + ', 1fr [col-start])';
+    grid.style.gridTemplateRows = 'repeat(' + gridSize + ', 1fr [row-start])';
+    for (let i = 0; i < (gridSize*gridSize); i++)
+    {
+        const square = document.createElement('div');
+        square.style['background-color'] = 'lightgray';
+        square.addEventListener('mouseenter', () => {square.style.backgroundColor = getSquareColor();});
+        square.classList.add('square');
+        grid.appendChild(square);
+    }
+    container.appendChild(grid);
 }
 init();
