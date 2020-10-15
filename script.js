@@ -1,3 +1,8 @@
+
+
+
+var squareColor = 'black';
+
 const container = document.querySelector('#board');
 
 const grid = document.createElement('div');
@@ -13,6 +18,7 @@ for (let i = 0; i < (16*16); i++)
 {
     const square = document.createElement('div');
     square.style['background-color'] = 'gray';
+    square.addEventListener('mouseenter', () => {square.style.backgroundColor = squareColor;});
     grid.appendChild(square);
 }
 container.appendChild(grid);
